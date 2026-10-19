@@ -360,7 +360,7 @@ Delivery on delivery.order_id=Orders.order_id;
 
 -- SHOW global variables like 'local_infile';
 
-select count(*) from customers;
+select* from customers;
 select count(*) from Orders;
 select count(*) from delivery;
 select count(*) from Menu_item;
