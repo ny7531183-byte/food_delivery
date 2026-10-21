@@ -2,7 +2,8 @@
 
 from cleaning_data import load_clean_data
 
-def customer_analysis(customer_df):
+def customer_analysis(customer_df,Orders):
+    
     total_customers=customer_df['customer_id'].nunique()
     gender_count=customer_df['gender'].value_counts()
     city=[]
@@ -14,12 +15,106 @@ def customer_analysis(customer_df):
     city_count=customer_df['city'].value_counts()
 
 
+    repeted_customers=Orders['customer_id'].value_counts()>1
+    total_repeted_customers=repeted_customers.sum()
+    new_customers=total_customers-total_repeted_customers
+
+
     return{'Total_customers':total_customers,
            'Gender count':gender_count,
-           'city_count':city_count}
+           'city_count':city_count,
+           'repeted_customers': int(total_repeted_customers),
+           'new customers':new_customers
+           }
 
 customer_df=load_clean_data()['Customers']
-print(customer_analysis(customer_df))
+order_df=load_clean_data()['Orders']
+print(customer_analysis(customer_df,order_df))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -4,7 +4,7 @@ from connect_sql import connect_tables
 def load_data():
     tables=connect_tables()
 
-    tablenames=['Customers','Menu','Rest','Orders','Delivery']
+    tablenames=['Customers','Menu','Orders','Rest','Delivery']
     i=0
 
     for table in tables:
@@ -25,6 +25,7 @@ def clean_data(df=pd.DataFrame()):
     df.drop_duplicates(inplace=True)
     for col in df.select_dtypes(include='object').columns:
         df[col]=df[col].str.strip()
+        df[col]=df[col].str.lower()
     return df 
 
 
