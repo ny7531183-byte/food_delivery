@@ -27,7 +27,26 @@ def  connect_tables():
     else:
          return customers,menu_item,orders,rest,delivery
 
+print(connect_tables())
 
 
    
-   
+# from sqlalchemy import create_engine, text
+
+# engine = create_engine(
+#     "mysql+pymysql://root:root@localhost:3306/food_delivery"
+# )
+
+# with engine.connect() as connection:
+#     result = connection.execute(text("SHOW TABLES"))
+
+#     for table in result:
+#         print(table[0])
+
+# from sqlalchemy import text
+
+# with engine.connect() as connection:
+#     result = connection.execute(text("SELECT * FROM customers LIMIT 10"))
+
+#     for row in result:
+#         print(row)

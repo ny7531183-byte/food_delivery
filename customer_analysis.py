@@ -27,9 +27,9 @@ def customer_analysis(customer_df,Orders):
            'new customers':new_customers
            }
 
-customer_df=load_clean_data()['Customers']
-order_df=load_clean_data()['Orders']
-print(customer_analysis(customer_df,order_df))
+# customer_df=load_clean_data()['Customers']
+# order_df=load_clean_data()['Orders']
+# print(customer_analysis(customer_df,order_df))
 
 
 
