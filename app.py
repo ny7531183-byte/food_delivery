@@ -3,7 +3,7 @@ from cleaning_data import load_clean_data
 from customer_analysis import customer_analysis
 from orders_analysis import analyze_order,monthly_orders
 from delivery_analysis import analyze_delivery,delivery_status
-import os
+from connect_sql import connect_database
 
 st.set_page_config(page_title="Food Delivery Analysis", layout="wide")
 
@@ -14,9 +14,8 @@ try:
     customer=data['Customers']
     orders=data['Orders']
     menu=data['Menu']
-    rest=data['rest']
+    rest=data['Rest']
     delivery=data['Delivery']
-    print("All Table Loaded")
 except:
     print("Database connection Failed")
 
@@ -68,8 +67,38 @@ with OA:
     st.line_chart(monthly_orders_data)
 
 
-
-
-
 with DA:
     st.header("Delivery Analysis Report")
+
+    st.divider()
+    d_m=analyze_delivery(orders,delivery)['delivery_minutes']
+    average_delivery_minutes=d_m.mean()
+    st.header("Average Delivery Time")
+    st.subheader(average_delivery_minutes)
+
+    #st.metric("Average delivery time","%.1f"%average_delivery_minutes)
+    st.divider()
+
+
+    st.header("Delivery Status ")
+    status=delivery_status(delivery)
+    st.bar_chart(status)
+
+    # st.divider()
+    # st.subheader("Delivery Data Record")
+    st.dataframe(analyze_delivery(orders,delivery))
+
+#Sidebar
+
+st.sidebar.header("Food Delivery Databases")
+
+engine,_= connect_database()
+
+if engine is not None:
+    st.sidebar.subheader("status: Connected")
+else:
+    st.sidebar.subheader("status: Not Connected")   
+
+
+
+
